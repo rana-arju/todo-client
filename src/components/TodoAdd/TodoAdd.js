@@ -6,12 +6,16 @@ import { toast } from 'react-toastify';
 const TodoAdd = () => {
    const { register, handleSubmit, formState: { errors } , reset} = useForm();
   const onSubmit = data => {
+    const task = {
+      complate: false,
+      todo: data?.todo
+    }
         fetch('http://localhost:5000/todo', {
                     method: "POST",
                     headers: {
                       'content-type': "application/json",
                     },
-                    body: JSON.stringify({todo: data?.todo})
+                    body: JSON.stringify(task)
                 })
                 .then(res => res.json())
                 .then(insertData => {
