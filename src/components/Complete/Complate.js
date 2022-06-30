@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 import Loading from '../Loading/Loading';
 
-const NewList = () => {
+const Complate = () => {
      const { isLoading, error, data:lists, refetch} = useQuery('lists', () =>
      fetch(`http://localhost:5000/todo`, {
          method: "GET",
@@ -29,7 +29,7 @@ const NewList = () => {
                             lists?.map(list => <div key={list._id }class="form-control">
                         <label class="gap-5 flex cursor-pointer">
                             <span><input type="checkbox" checked="checked" class="checkbox checkbox-primary" /></span>
-                            <span class="text-xl">{list.todo}</span> 
+                            <span class="text-xl line-through">{list.todo}</span> 
                         </label>
                         </div>)
                         }
@@ -42,4 +42,4 @@ const NewList = () => {
     );
 };
 
-export default NewList;
+export default Complate;

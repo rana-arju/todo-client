@@ -4,7 +4,7 @@ import {  BsPlusLg } from 'react-icons/bs';
 import { toast } from 'react-toastify';
 
 const TodoAdd = () => {
-   const { register, handleSubmit, formState: { errors } } = useForm();
+   const { register, handleSubmit, formState: { errors } , reset} = useForm();
   const onSubmit = data => {
         fetch('http://localhost:5000/todo', {
                     method: "POST",
@@ -19,6 +19,7 @@ const TodoAdd = () => {
                         toast.success('Successfully Add!')
                     }
                 });
+                reset();
               }
     return (
       <div class="h-1/2 w-1/2 mx-auto my-10 bg-base-200">
@@ -44,6 +45,7 @@ const TodoAdd = () => {
         </div>
             </div>
         </div>
+        
     </div>
     );
 };

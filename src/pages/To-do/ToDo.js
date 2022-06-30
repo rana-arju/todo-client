@@ -1,9 +1,11 @@
 import React from 'react';
+import NewList from '../../components/NewList/NewList';
 
 const ToDo = () => {
     return (
-        <div>
-            <h2>To Do</h2>
+       <div>
+            <h2 className='text-2xl font-bold text-center uppercase my-5'>Your Task Board</h2>
+            <NewList />
         </div>
     );
 };
