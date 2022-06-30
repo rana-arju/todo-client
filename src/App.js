@@ -1,18 +1,23 @@
-import logo from './logo.svg';
+import { Routes, Route} from "react-router-dom";
 import './App.css';
+import Navbar from "./components/Navbar/Navbar";
+import TodoAdd from "./components/TodoAdd/TodoAdd";
+import Calendar from "./pages/Calendar/Calendar";
+import ComplateTask from "./pages/ComplateTask/ComplateTask";
+import ToDo from "./pages/To-do/ToDo";
+  import { ToastContainer} from 'react-toastify';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-          <button class="btn btn-primary">Button</button>
-
-        </p>
-    
-      </header>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<TodoAdd />} />
+        <Route path="/todo" element={<ToDo />} />
+        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/complate" element={<ComplateTask />} />
+      </Routes>
+      <ToastContainer />
     </div>
   );
 }
