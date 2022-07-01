@@ -1,14 +1,20 @@
 import { useState } from 'react';
-import { FaEdit } from 'react-icons/fa';
+import { useForm } from "react-hook-form";
 import { AiFillDelete } from 'react-icons/ai';
+import { FaEdit } from 'react-icons/fa';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 import Loading from '../Loading/Loading';
 
 const NewList = () => {
+    const [toggleBtn, setToggleBtn] = useState(true);
+    const [inputData, setInputData] = useState(" ");
+    const { register, handleSubmit, formState: { errors } , reset} = useForm();
     const [agree, setAgree] = useState('')
+
+    // Get all Todo List
      const { isLoading, error, data:lists, refetch} = useQuery('lists', () =>
-     fetch(`http://localhost:5000/todo`, {
+     fetch(`https://immense-castle-15525.herokuapp.com/todo`, {
          method: "GET",
           headers: {
             'content-type': 'application/json',
@@ -28,7 +34,7 @@ const NewList = () => {
         const list = {
             todo: task,
         };
-        fetch(`http://localhost:5000/todo/complate`, {
+        fetch(`https://immense-castle-15525.herokuapp.com/todo/complate`, {
             method: "POST",
             headers: {
                 'content-type': 'application/json',
@@ -42,7 +48,8 @@ const NewList = () => {
                 refetch();
             }
         });
-        fetch(`http://localhost:5000/todo/complate/${task}`, {
+        //delete list after complate button click
+        fetch(`https://immense-castle-15525.herokuapp.com/todo/complate/${task}`, {
             method: "DELETE",
             headers: {
                 'content-type': 'application/json',
@@ -50,14 +57,21 @@ const NewList = () => {
         })
         .then(res =>res.json())
         .then(data => {
-                refetch();
+            refetch();
         })
     }
-    const  handleEdit = task => {
-        alert("clicked", task)
+    // when edit button click open a input filed when we enter our updeted data
+    const  handleEdit = id => {
+        const newEditItem = lists.find((list) => {
+            return list._id === id;
+        })
+        setToggleBtn(false);
+        setInputData(newEditItem)
+       
     }
+    //List delete handle
     const handleDelete = id => {
-          fetch(`http://localhost:5000/todo/${id}`, {
+          fetch(`https://immense-castle-15525.herokuapp.com/todo/${id}`, {
             method: "DELETE",
             headers: {
                 'content-type': 'application/json',
@@ -71,17 +85,51 @@ const NewList = () => {
             }
         })
     }
+    const onSubmit = (data) => {
+        const updatedData = {
+            todo: data?.todo
+        }
+         fetch(`https://immense-castle-15525.herokuapp.com/todo/${inputData._id}`, {
+            method: "PUT",
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(updatedData)
+        })
+        .then(res =>res.json())
+        .then(data => {
+            toast.success(`You Are successfully Updated One Task!`)
+            refetch();
+        })
+      reset();
+    }
+
     return (
-         <div class="h-1/2 w-full md:w-1/2 mx-auto my-10 bg-base-200">
-            <div class="text-center">
-            <div class="min-w-lg">
-                <div class="card  w-full shadow-2xl bg-base-100">
-                    <div class="card-body mx-8">
-                        {
-                       lists?.map(list =>  <div key={list._id } class="form-control flex flex-row items-center gap-5">
-                        <label class="gap-2 md:gap-5 flex cursor-pointer" onClick={() => handleChecked(list.todo)}>
-                            <span><input  type="checkbox" checked={agree===list.todo && "checked"} class="checkbox checkbox-primary" /></span>
-                            <span class="text-xl">{list.todo}</span> 
+         <div className="h-1/2 w-full md:w-1/2 mx-auto my-10 bg-base-200">
+            <div className="text-center">
+            <div className="min-w-lg">
+                <div className="card  w-full shadow-2xl bg-base-100">
+                <div className="card-body mx-8">
+              { !toggleBtn && 
+              <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="form-control">
+                    <label className="label">
+                        <span className="label-text text-lg">Update Task</span>
+                    </label>
+                    <input type="text" name="todo" placeholder="update Your Task" className="input input-bordered" {...register("todo", { required: true })} />
+                    <p className='mt-3 text-red-500'> {errors.todo?.type === 'required' && "Add anything*"}</p>
+                    </div>
+                    <div className="form-control mt-6">
+                    <button className="btn btn-primary font-bold">Updated list</button>
+                    </div>
+                    </form>
+                    }
+
+                    {
+                       lists?.map(list =>  <div key={list._id } className="form-control flex flex-row items-center gap-5">
+                        <label className="gap-2 md:gap-5 flex cursor-pointer" onClick={() => handleChecked(list.todo)}>
+                            <span><input  type="checkbox" checked={agree===list.todo && "checked"} readOnly className="checkbox checkbox-primary" /></span>
+                            <span className="text-xl">{list.todo}</span> 
                         </label>
                         <div className='flex gap-2'>
                             <span className="text-lg md:text-xl cursor-pointer text-primary" onClick={() => handleEdit(list._id)}><FaEdit /></span>

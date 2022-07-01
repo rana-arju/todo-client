@@ -9,7 +9,7 @@ const TodoAdd = () => {
       complate: false,
       todo: data?.todo
     }
-        fetch('http://localhost:5000/todo', {
+        fetch('https://immense-castle-15525.herokuapp.com/todo', {
                     method: "POST",
                     headers: {
                       'content-type': "application/json",
@@ -25,23 +25,23 @@ const TodoAdd = () => {
                 reset();
               }
     return (
-      <div class="h-1/2 w-full md:w-1/2 mx-auto my-10 bg-base-200">
-        <div class="text-center">
-        <div class="min-w-lg">
-        <div class="card  w-full shadow-2xl bg-base-100">
-      <div class="card-body">
+      <div className="h-1/2 w-full md:w-1/2 mx-auto my-10 bg-base-200">
+        <div className="text-center">
+        <div className="min-w-lg">
+        <div className="card  w-full shadow-2xl bg-base-100">
+      <div className="card-body">
         <h2 className='text-2xl capitalize font-bold'>Add Your Task</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div class="form-control">
-          <label class="label">
-            <span class="label-text text-lg">Add Task</span>
+          <div className="form-control">
+          <label className="label">
+            <span className="label-text text-lg">Add Task</span>
           </label>
-          <input type="text" name="todo" placeholder="Write Your Task" class="input input-bordered" {...register("todo", { required: true })} />
+          <input type="text" name="todo" placeholder="Write Your Task" className="input input-bordered" {...register("todo", { required: true })} />
           <p className='mt-3 text-red-500'> {errors.todo?.type === 'required' && "Add anything*"}</p>
         </div>
         
-        <div class="form-control mt-6">
-          <button class="btn btn-primary font-bold">Add list <BsPlusLg /></button>
+        <div className="form-control mt-6">
+          <button className="btn btn-primary font-bold">Add list <BsPlusLg /></button>
         </div>
         </form>
         </div>
