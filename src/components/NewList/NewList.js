@@ -1,14 +1,13 @@
-import React, {useState} from 'react';
+import { useState } from 'react';
+import { FaEdit } from 'react-icons/fa';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 import Loading from '../Loading/Loading';
-import { FaEdit  } from 'react-icons/fa';
-import { AiFillDelete } from 'react-icons/ai';
 
 const NewList = () => {
     const [agree, setAgree] = useState(null)
      const { isLoading, error, data:lists, refetch} = useQuery('lists', () =>
-     fetch(`http://localhost:5000/todo`, {
+     fetch(`https://immense-castle-15525.herokuapp.com/todo`, {
          method: "GET",
           headers: {
             'content-type': 'application/json',
@@ -17,7 +16,7 @@ const NewList = () => {
    )
 
 //    Put Method Implement
-    fetch(`http://localhost:5000/todo/complate/${agree}`, {
+    fetch(`https://immense-castle-15525.herokuapp.com/todo/complate/${agree}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json',

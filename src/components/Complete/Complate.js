@@ -1,11 +1,10 @@
-import React from 'react';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 import Loading from '../Loading/Loading';
 
 const Complate = () => {
      const { isLoading, error, data:lists, refetch} = useQuery('lists', () =>
-     fetch(`http://localhost:5000/todo`, {
+     fetch(`https://immense-castle-15525.herokuapp.com/todo`, {
          method: "GET",
           headers: {
             'content-type': 'application/json',

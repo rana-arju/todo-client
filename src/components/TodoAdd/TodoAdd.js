@@ -1,6 +1,5 @@
-import React from "react";
 import { useForm } from "react-hook-form";
-import {  BsPlusLg } from 'react-icons/bs';
+import { BsPlusLg } from 'react-icons/bs';
 import { toast } from 'react-toastify';
 
 const TodoAdd = () => {
@@ -10,7 +9,7 @@ const TodoAdd = () => {
       complate: false,
       todo: data?.todo
     }
-        fetch('http://localhost:5000/todo', {
+        fetch('https://immense-castle-15525.herokuapp.com/todo', {
                     method: "POST",
                     headers: {
                       'content-type': "application/json",
