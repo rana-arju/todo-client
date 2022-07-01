@@ -7,6 +7,7 @@ import ToDo from "./pages/To-do/ToDo";
 import Home from "./pages/Home/Home";
 import { ToastContainer} from 'react-toastify';
 import Footer from "./components/Footer/Footer";
+import "react-datepicker/dist/react-datepicker.css";
 
 function App() {
   return (
