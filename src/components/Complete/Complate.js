@@ -4,7 +4,7 @@ import Loading from '../Loading/Loading';
 
 const Complate = () => {
      const { isLoading, error, data:lists, refetch} = useQuery('lists', () =>
-     fetch(`https://immense-castle-15525.herokuapp.com/todo`, {
+     fetch(`http://localhost:5000/todo/complate`, {
          method: "GET",
           headers: {
             'content-type': 'application/json',

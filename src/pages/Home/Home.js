@@ -11,10 +11,10 @@ const Home = () => {
                 <h2 className='text-xl md:text-2xl font-bold text-center uppercase my-5'>Your Task Board</h2>
             <NewList />
             </div>
-            <div>
-            <h2 className='text-xl md:text-2xl font-bold text-center uppercase my-5'>You are completed</h2>
+           <div>
+            <h2 className='text-2xl font-bold text-center uppercase my-5'>You are completed</h2>
             <Complate />
-            </div>
+    </div>
         </div>
     );
 };

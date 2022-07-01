@@ -9,7 +9,7 @@ const TodoAdd = () => {
       complate: false,
       todo: data?.todo
     }
-        fetch('https://immense-castle-15525.herokuapp.com/todo', {
+        fetch('http://localhost:5000/todo', {
                     method: "POST",
                     headers: {
                       'content-type': "application/json",
