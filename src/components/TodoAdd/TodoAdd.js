@@ -26,7 +26,7 @@ const TodoAdd = () => {
                 reset();
               }
     return (
-      <div class="h-1/2 w-1/2 mx-auto my-10 bg-base-200">
+      <div class="h-1/2 w-full md:w-1/2 mx-auto my-10 bg-base-200">
         <div class="text-center">
         <div class="min-w-lg">
         <div class="card  w-full shadow-2xl bg-base-100">
