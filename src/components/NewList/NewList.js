@@ -100,8 +100,11 @@ const NewList = () => {
         .then(data => {
             toast.success(`You Are successfully Updated One Task!`)
             refetch();
+
         })
       reset();
+    setToggleBtn(true);
+
     }
 
     return (
